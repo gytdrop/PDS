@@ -1,0 +1,235 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <model name="t_motor_f60">
+    
+    <!-- ========================================== -->
+    <!-- 1. Stator Link (Rigid Motor Base)          -->
+    <!-- ========================================== -->
+    <link name="motor_base">
+      <pose>0 0 0 0 0 0</pose>
+      
+      <inertial>
+        <pose>0 0 0.005 0 0 0</pose>
+        <mass>0.026</mass>
+        <inertia>
+          <ixx>1.8e-06</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>1.8e-06</iyy>
+          <iyz>0.0</iyz>
+          <izz>2.5e-06</izz>
+        </inertia>
+      </inertial>
+
+      <!-- CNC Stator Base Ring -->
+      <visual name="stator_base_visual">
+        <pose>0 0 0.003 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.014</radius>
+            <length>0.006</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.15 0.16 0.18 1.0</ambient>
+          <diffuse>0.25 0.26 0.28 1.0</diffuse>
+          <specular>0.7 0.7 0.7 1.0</specular>
+          <pbr>
+            <metal>
+              <roughness>0.25</roughness>
+              <metalness>0.85</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Exposed Copper Armature Coils -->
+      <visual name="copper_coils_visual">
+        <pose>0 0 0.008 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.011</radius>
+            <length>0.007</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.6 0.25 0.05 1.0</ambient>
+          <diffuse>0.85 0.42 0.12 1.0</diffuse>
+          <specular>0.8 0.6 0.4 1.0</specular>
+          <pbr>
+            <metal>
+              <roughness>0.3</roughness>
+              <metalness>0.9</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Base Mount Collision Cylinder -->
+      <collision name="motor_base_collision">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.014</radius>
+            <length>0.010</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- ========================================== -->
+    <!-- 2. Rotor Link (Bell + Propeller)           -->
+    <!-- ========================================== -->
+    <link name="rotor">
+      <pose>0 0 0.012 0 0 0</pose>
+      
+      <inertial>
+        <pose>0 0 0.006 0 0 0</pose>
+        <mass>0.009</mass>
+        <inertia>
+          <ixx>1.2e-06</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>1.2e-05</iyy>
+          <iyz>0.0</iyz>
+          <izz>1.3e-05</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Anodized Midnight Blue Motor Bell -->
+      <visual name="motor_bell_visual">
+        <pose>0 0 0.004 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0135</radius>
+            <length>0.012</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.05 0.10 0.25 1.0</ambient>
+          <diffuse>0.10 0.22 0.55 1.0</diffuse>
+          <specular>0.9 0.9 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <roughness>0.20</roughness>
+              <metalness>0.80</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Polished Silver Bevel Top Ring -->
+      <visual name="bell_top_ring_visual">
+        <pose>0 0 0.0105 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0136</radius>
+            <length>0.001</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.7 0.7 1.0</ambient>
+          <diffuse>0.9 0.9 0.9 1.0</diffuse>
+          <specular>1.0 1.0 1.0 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Central M5 Titanium Propeller Shaft & Nut -->
+      <visual name="shaft_nut_visual">
+        <pose>0 0 0.014 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0035</radius>
+            <length>0.008</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.4 0.4 0.4 1.0</ambient>
+          <diffuse>0.6 0.6 0.65 1.0</diffuse>
+          <specular>0.9 0.9 0.9 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- High-Efficiency 5-Inch Tri-Blade Propeller (Blade 1) -->
+      <visual name="prop_blade_1">
+        <pose>0.035 0.0 0.012 0 0.08 0</pose>
+        <geometry>
+          <box>
+            <size>0.065 0.012 0.0015</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.08 0.09 0.10 0.85</ambient>
+          <diffuse>0.12 0.14 0.16 0.85</diffuse>
+          <specular>0.5 0.5 0.5 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Propeller Blade 2 (Rotated 120°) -->
+      <visual name="prop_blade_2">
+        <pose>-0.0175 0.0303 0.012 0 0.08 2.094395</pose>
+        <geometry>
+          <box>
+            <size>0.065 0.012 0.0015</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.08 0.09 0.10 0.85</ambient>
+          <diffuse>0.12 0.14 0.16 0.85</diffuse>
+          <specular>0.5 0.5 0.5 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Propeller Blade 3 (Rotated 240°) -->
+      <visual name="prop_blade_3">
+        <pose>-0.0175 -0.0303 0.012 0 0.08 4.18879</pose>
+        <geometry>
+          <box>
+            <size>0.065 0.012 0.0015</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.08 0.09 0.10 0.85</ambient>
+          <diffuse>0.12 0.14 0.16 0.85</diffuse>
+          <specular>0.5 0.5 0.5 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Propeller Swept Collision Volume -->
+      <collision name="propeller_collision">
+        <pose>0 0 0.012 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.065</radius>
+            <length>0.004</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_without_contact>true</collide_without_contact>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <!-- ========================================== -->
+    <!-- 3. Continuous Revolute Joint (Shaft)       -->
+    <!-- ========================================== -->
+    <joint name="shaft_joint" type="revolute">
+      <parent>motor_base</parent>
+      <child>rotor</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.0001</damping>
+          <friction>0.0001</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+  </model>
+</sdf>

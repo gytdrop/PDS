@@ -1,0 +1,21 @@
+{
+	"nodes":[
+		{"id":"f579bd1e2cfae813","x":-499,"y":-104,"width":250,"height":60,"color":"3","type":"text","text":"Gazebo simulation"},
+		{"id":"e74b59e889b638d7","x":-480,"y":120,"width":250,"height":60,"color":"6","type":"text","text":"program file\n"},
+		{"id":"69f9f1271b3bd861","x":-150,"y":0,"width":250,"height":60,"color":"4","type":"text","text":"interface"},
+		{"id":"5d33881aae2f6478","x":100,"y":240,"width":250,"height":60,"color":"4","type":"text","text":"Resources\n"},
+		{"id":"a02755d7433163c6","x":225,"y":0,"width":250,"height":60,"color":"4","type":"text","text":"gist github small chunks"},
+		{"id":"8fffec49606233d7","x":-25,"y":-134,"width":250,"height":60,"color":"2","type":"text","text":"p2\n"},
+		{"id":"f024939a7fdd99bb","x":420,"y":-134,"width":250,"height":60,"color":"2","type":"text","text":"p3"},
+		{"id":"90671312be6d0858","x":200,"y":-220,"width":250,"height":60,"color":"2","type":"text","text":"p1\n"}
+	],
+	"edges":[
+		{"id":"9bfadcb2c673f1cb","fromNode":"f579bd1e2cfae813","fromSide":"bottom","toNode":"e74b59e889b638d7","toSide":"top"},
+		{"id":"3d7a9863d89bac79","fromNode":"5d33881aae2f6478","fromSide":"top","toNode":"69f9f1271b3bd861","toSide":"bottom"},
+		{"id":"24a9bef16d02918a","fromNode":"69f9f1271b3bd861","fromSide":"left","toNode":"e74b59e889b638d7","toSide":"right"},
+		{"id":"4f570dc5d418f913","fromNode":"90671312be6d0858","fromSide":"bottom","toNode":"a02755d7433163c6","toSide":"top"},
+		{"id":"65d18b0344890373","fromNode":"8fffec49606233d7","fromSide":"right","toNode":"a02755d7433163c6","toSide":"top"},
+		{"id":"485dd263b148563e","fromNode":"f024939a7fdd99bb","fromSide":"left","toNode":"a02755d7433163c6","toSide":"top"},
+		{"id":"e57fbf6bbc26b53d","fromNode":"a02755d7433163c6","fromSide":"left","toNode":"69f9f1271b3bd861","toSide":"right"}
+	]
+}

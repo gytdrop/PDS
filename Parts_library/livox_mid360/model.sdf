@@ -1,0 +1,192 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <model name="livox_mid360">
+
+    <!-- ========================================== -->
+    <!-- 1. LiDAR Mechanical Housing (Base Link)    -->
+    <!-- ========================================== -->
+    <link name="livox_base">
+      <pose>0 0 0 0 0 0</pose>
+      
+      <inertial>
+        <pose>0 0 0.020 0 0 0</pose>
+        <mass>0.250</mass>
+        <inertia>
+          <ixx>0.00018</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.00018</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.00015</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Main Lower Aluminum Casing -->
+      <visual name="housing_body_visual">
+        <pose>0 0 0.015 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0325</radius>
+            <length>0.030</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.15 0.16 0.18 1.0</ambient>
+          <diffuse>0.20 0.22 0.24 1.0</diffuse>
+          <specular>0.7 0.7 0.7 1.0</specular>
+          <pbr>
+            <metal>
+              <roughness>0.30</roughness>
+              <metalness>0.75</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Heat Dissipation Fins (Cooling Ribs Visual) -->
+      <visual name="heatsink_ring_visual">
+        <pose>0 0 0.008 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.034</radius>
+            <length>0.010</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.10 0.11 0.12 1.0</ambient>
+          <diffuse>0.14 0.15 0.16 1.0</diffuse>
+          <specular>0.5 0.5 0.5 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- CNC Chamfered Mid-Ring -->
+      <visual name="mid_ring_visual">
+        <pose>0 0 0.031 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.031</radius>
+            <length>0.003</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1.0</ambient>
+          <diffuse>0.5 0.5 0.55 1.0</diffuse>
+          <specular>0.9 0.9 0.9 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Housing Collision Geometry -->
+      <collision name="housing_collision">
+        <pose>0 0 0.020 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.034</radius>
+            <length>0.040</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- ========================================== -->
+    <!-- 2. Optical Center Link & Glass Dome        -->
+    <!-- ========================================== -->
+    <link name="livox_sensor_frame">
+      <pose>0 0 0.035 0 0 0</pose>
+      
+      <inertial>
+        <pose>0 0 0.008 0 0 0</pose>
+        <mass>0.015</mass>
+        <inertia>
+          <ixx>5.0e-06</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>5.0e-06</iyy>
+          <iyz>0.0</iyz>
+          <izz>6.0e-06</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Optical Prism Translucent Sapphire Glass Dome -->
+      <visual name="optical_dome_visual">
+        <pose>0 0 0.008 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.028</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.05 0.15 0.35 0.75</ambient>
+          <diffuse>0.10 0.25 0.65 0.75</diffuse>
+          <specular>0.9 0.95 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <roughness>0.10</roughness>
+              <metalness>0.30</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Livox Internal Scanning Core Prism Visual -->
+      <visual name="internal_prism_visual">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.016 0.016 0.012</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.02 0.03 1.0</ambient>
+          <diffuse>0.05 0.05 0.06 1.0</diffuse>
+          <emissive>0.0 0.2 0.4 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- ========================================== -->
+      <!-- 3. GPU Ray LiDAR Sensor Engine             -->
+      <!-- ========================================== -->
+      <sensor name="livox_mid360_lidar" type="gpu_lidar">
+        <pose>0 0 0.010 0 0 0</pose>
+        <always_on>true</always_on>
+        <update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <topic>/model/modular_drone/livox_lidar/scan</topic>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159265</min_angle>
+              <max_angle>3.14159265</max_angle>
+            </horizontal>
+            <vertical>
+              <!-- Livox Mid-360 specs: -7 deg (-0.122 rad) to +52 deg (+0.907 rad) -->
+              <samples>64</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.122173</min_angle>
+              <max_angle>0.907571</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.10</min>
+            <max>40.0</max>
+            <resolution>0.005</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+
+    </link>
+
+    <!-- Rigid Internal Mount Bonding Frame to Housing -->
+    <joint name="optical_mount_joint" type="fixed">
+      <parent>livox_base</parent>
+      <child>livox_sensor_frame</child>
+    </joint>
+
+  </model>
+</sdf>

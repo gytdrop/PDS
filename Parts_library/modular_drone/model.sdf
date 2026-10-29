@@ -1,0 +1,179 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <model name="modular_drone">
+    <pose>0 0 0.05 0 0 0</pose>
+    
+    <!-- ============================================================= -->
+    <!-- 1. Include Base Airframe (Chassis, Battery, Avionics, Skids)  -->
+    <!-- ============================================================= -->
+    <include>
+      <uri>model://chassis</uri>
+      <name>chassis</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- ============================================================= -->
+    <!-- 2. Include Front-Left Motor Unit (motor_fl)                   -->
+    <!-- ============================================================= -->
+    <include>
+      <uri>model://t_motor_f60</uri>
+      <name>motor_fl</name>
+      <pose relative_to="chassis::base_link">0.15 0.15 0.03 0 0 0</pose>
+    </include>
+    <joint name="joint_mount_fl" type="fixed">
+      <parent>chassis::base_link</parent>
+      <child>motor_fl::motor_base</child>
+    </joint>
+
+    <!-- ============================================================= -->
+    <!-- 3. Include Front-Right Motor Unit (motor_fr)                  -->
+    <!-- ============================================================= -->
+    <include>
+      <uri>model://t_motor_f60</uri>
+      <name>motor_fr</name>
+      <pose relative_to="chassis::base_link">0.15 -0.15 0.03 0 0 0</pose>
+    </include>
+    <joint name="joint_mount_fr" type="fixed">
+      <parent>chassis::base_link</parent>
+      <child>motor_fr::motor_base</child>
+    </joint>
+
+    <!-- ============================================================= -->
+    <!-- 4. Include Rear-Left Motor Unit (motor_rl)                    -->
+    <!-- ============================================================= -->
+    <include>
+      <uri>model://t_motor_f60</uri>
+      <name>motor_rl</name>
+      <pose relative_to="chassis::base_link">-0.15 0.15 0.03 0 0 0</pose>
+    </include>
+    <joint name="joint_mount_rl" type="fixed">
+      <parent>chassis::base_link</parent>
+      <child>motor_rl::motor_base</child>
+    </joint>
+
+    <!-- ============================================================= -->
+    <!-- 5. Include Rear-Right Motor Unit (motor_rr)                   -->
+    <!-- ============================================================= -->
+    <include>
+      <uri>model://t_motor_f60</uri>
+      <name>motor_rr</name>
+      <pose relative_to="chassis::base_link">-0.15 -0.15 0.03 0 0 0</pose>
+    </include>
+    <joint name="joint_mount_rr" type="fixed">
+      <parent>chassis::base_link</parent>
+      <child>motor_rr::motor_base</child>
+    </joint>
+
+    <!-- ============================================================= -->
+    <!-- 6. Include Perception Payload (Livox Mid-360 LiDAR)           -->
+    <!-- ============================================================= -->
+    <include>
+      <uri>model://livox_mid360</uri>
+      <name>lidar</name>
+      <!-- Tilted 10 degrees down (0.1745 rad pitch) to eliminate front dead-zone -->
+      <pose relative_to="chassis::base_link">0.12 0 0.05 0 0.174533 0</pose>
+    </include>
+    <joint name="joint_mount_lidar" type="fixed">
+      <parent>chassis::base_link</parent>
+      <child>lidar::livox_base</child>
+    </joint>
+
+    <!-- ============================================================= -->
+    <!-- 7. Core Vehicle Avionics & Odometry Plugins                   -->
+    <!-- ============================================================= -->
+    <!-- Sensor System Plugin (Enables GPU LiDAR and Airframe Sensors) -->
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Odometry Publisher Plugin (Publishes ground truth & odom)     -->
+    <plugin filename="gz-sim-odometry-publisher-system"
+      name="gz::sim::systems::OdometryPublisher">
+      <dimensions>3</dimensions>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <odom_topic>/model/modular_drone/odometry</odom_topic>
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>chassis::base_link</robot_base_frame>
+    </plugin>
+
+    <!-- ============================================================= -->
+    <!-- 8. Aerodynamic MulticopterMotorModel Actuator Plugins (0..3)  -->
+    <!-- ============================================================= -->
+    <!-- Motor 0: Front-Right (CCW) -->
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>motor_fr::shaft_joint</jointName>
+      <linkName>motor_fr::rotor</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>2200.0</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <actuator_number>0</actuator_number>
+      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+
+    <!-- Motor 1: Rear-Left (CCW) -->
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>motor_rl::shaft_joint</jointName>
+      <linkName>motor_rl::rotor</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>2200.0</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <actuator_number>1</actuator_number>
+      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+
+    <!-- Motor 2: Front-Left (CW) -->
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>motor_fl::shaft_joint</jointName>
+      <linkName>motor_fl::rotor</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>2200.0</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <actuator_number>2</actuator_number>
+      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+
+    <!-- Motor 3: Rear-Right (CW) -->
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>motor_rr::shaft_joint</jointName>
+      <linkName>motor_rr::rotor</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>2200.0</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <actuator_number>3</actuator_number>
+      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+
+  </model>
+</sdf>

@@ -1,0 +1,512 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <model name="chassis">
+    <link name="base_link">
+      <pose>0 0 0 0 0 0</pose>
+      
+      <!-- ========================================== -->
+      <!-- Physical & Inertial Parameters             -->
+      <!-- ========================================== -->
+      <inertial>
+        <pose>0 0 0.005 0 0 0</pose>
+        <mass>0.950</mass>
+        <inertia>
+          <ixx>0.0125</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0125</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0210</izz>
+        </inertia>
+      </inertial>
+
+      <!-- ========================================== -->
+      <!-- Visual Geometry: Aerospace High-Fidelity   -->
+      <!-- ========================================== -->
+
+      <!-- Lower Carbon Fiber Deck Plate -->
+      <visual name="lower_deck_visual">
+        <pose>0 0 -0.010 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.160 0.080 0.003</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.12 0.13 0.15 1.0</ambient>
+          <diffuse>0.15 0.16 0.18 1.0</diffuse>
+          <specular>0.4 0.4 0.4 1.0</specular>
+          <pbr>
+            <metal>
+              <roughness>0.35</roughness>
+              <metalness>0.20</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Upper Carbon Fiber Top Plate -->
+      <visual name="upper_deck_visual">
+        <pose>0 0 0.025 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.170 0.075 0.0025</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.12 0.13 0.15 1.0</ambient>
+          <diffuse>0.15 0.16 0.18 1.0</diffuse>
+          <specular>0.4 0.4 0.4 1.0</specular>
+          <pbr>
+            <metal>
+              <roughness>0.35</roughness>
+              <metalness>0.20</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Structural CNC Aluminum Standoffs (Red Anodized) -->
+      <visual name="standoff_fl_visual">
+        <pose>0.065 0.030 0.0075 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.003</radius>
+            <length>0.035</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.05 0.05 1.0</ambient>
+          <diffuse>0.8 0.10 0.10 1.0</diffuse>
+          <specular>0.9 0.4 0.4 1.0</specular>
+        </material>
+      </visual>
+      <visual name="standoff_fr_visual">
+        <pose>0.065 -0.030 0.0075 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.003</radius>
+            <length>0.035</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.05 0.05 1.0</ambient>
+          <diffuse>0.8 0.10 0.10 1.0</diffuse>
+          <specular>0.9 0.4 0.4 1.0</specular>
+        </material>
+      </visual>
+      <visual name="standoff_rl_visual">
+        <pose>-0.065 0.030 0.0075 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.003</radius>
+            <length>0.035</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.05 0.05 1.0</ambient>
+          <diffuse>0.8 0.10 0.10 1.0</diffuse>
+          <specular>0.9 0.4 0.4 1.0</specular>
+        </material>
+      </visual>
+      <visual name="standoff_rr_visual">
+        <pose>-0.065 -0.030 0.0075 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.003</radius>
+            <length>0.035</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.05 0.05 1.0</ambient>
+          <diffuse>0.8 0.10 0.10 1.0</diffuse>
+          <specular>0.9 0.4 0.4 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Carbon Fiber Boom Arm: Front-Left (FL) -->
+      <visual name="arm_fl_visual">
+        <pose>0.075 0.075 0.0 0 0 0.785398</pose>
+        <geometry>
+          <box>
+            <size>0.170 0.024 0.005</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.12 1.0</ambient>
+          <diffuse>0.14 0.15 0.16 1.0</diffuse>
+          <specular>0.3 0.3 0.3 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Carbon Fiber Boom Arm: Front-Right (FR) -->
+      <visual name="arm_fr_visual">
+        <pose>0.075 -0.075 0.0 0 0 -0.785398</pose>
+        <geometry>
+          <box>
+            <size>0.170 0.024 0.005</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.12 1.0</ambient>
+          <diffuse>0.14 0.15 0.16 1.0</diffuse>
+          <specular>0.3 0.3 0.3 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Carbon Fiber Boom Arm: Rear-Left (RL) -->
+      <visual name="arm_rl_visual">
+        <pose>-0.075 0.075 0.0 0 0 -0.785398</pose>
+        <geometry>
+          <box>
+            <size>0.170 0.024 0.005</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.12 1.0</ambient>
+          <diffuse>0.14 0.15 0.16 1.0</diffuse>
+          <specular>0.3 0.3 0.3 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Carbon Fiber Boom Arm: Rear-Right (RR) -->
+      <visual name="arm_rr_visual">
+        <pose>-0.075 -0.075 0.0 0 0 0.785398</pose>
+        <geometry>
+          <box>
+            <size>0.170 0.024 0.005</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.12 1.0</ambient>
+          <diffuse>0.14 0.15 0.16 1.0</diffuse>
+          <specular>0.3 0.3 0.3 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- High-Energy 6S LiPo Battery Pack (Underbody Mount) -->
+      <visual name="battery_casing_visual">
+        <pose>-0.010 0 -0.028 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.135 0.045 0.032</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.08 0.08 0.09 1.0</ambient>
+          <diffuse>0.12 0.12 0.13 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+      <!-- Battery Accent Racing Decal -->
+      <visual name="battery_decal_visual">
+        <pose>-0.010 0 -0.028 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040 0.046 0.033</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8 0.5 0.0 1.0</ambient>
+          <diffuse>0.95 0.65 0.05 1.0</diffuse>
+          <specular>0.8 0.8 0.8 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- Avionics Flight Controller Stack -->
+      <visual name="flight_stack_visual">
+        <pose>0 0 0.008 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.038 0.038 0.016</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05 0.05 0.06 1.0</ambient>
+          <diffuse>0.08 0.09 0.10 1.0</diffuse>
+          <specular>0.3 0.3 0.3 1.0</specular>
+        </material>
+      </visual>
+      <!-- Active Status LED Beacon (Cyan Glow) -->
+      <visual name="status_led_visual">
+        <pose>0.020 0 0.017 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.003</radius>
+            <length>0.004</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.8 0.9 1.0</ambient>
+          <diffuse>0.0 0.9 1.0 1.0</diffuse>
+          <emissive>0.0 0.8 1.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- Integrated TPU Shock-Absorbing Landing Skids -->
+      <visual name="landing_skid_fl_visual">
+        <pose>0.15 0.15 -0.025 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.006</radius>
+            <length>0.050</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1.0</ambient>
+          <diffuse>0.18 0.18 0.20 1.0</diffuse>
+        </material>
+      </visual>
+      <visual name="landing_skid_fr_visual">
+        <pose>0.15 -0.15 -0.025 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.006</radius>
+            <length>0.050</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1.0</ambient>
+          <diffuse>0.18 0.18 0.20 1.0</diffuse>
+        </material>
+      </visual>
+      <visual name="landing_skid_rl_visual">
+        <pose>-0.15 0.15 -0.025 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.006</radius>
+            <length>0.050</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1.0</ambient>
+          <diffuse>0.18 0.18 0.20 1.0</diffuse>
+        </material>
+      </visual>
+      <visual name="landing_skid_rr_visual">
+        <pose>-0.15 -0.15 -0.025 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.006</radius>
+            <length>0.050</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1.0</ambient>
+          <diffuse>0.18 0.18 0.20 1.0</diffuse>
+        </material>
+      </visual>
+
+      <!-- ========================================== -->
+      <!-- Collision Geometry (Optimized Convex Hulls)-->
+      <!-- ========================================== -->
+      <collision name="center_deck_collision">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.170 0.085 0.045</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.002</min_depth>
+              <max_vel>0.0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Landing Skids Collision for Stable Ground Contact -->
+      <collision name="skid_fl_collision">
+        <pose>0.15 0.15 -0.035 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.012</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>100000.0</kp>
+              <kd>100.0</kd>
+              <min_depth>0.002</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <collision name="skid_fr_collision">
+        <pose>0.15 -0.15 -0.035 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.012</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>100000.0</kp>
+              <kd>100.0</kd>
+              <min_depth>0.002</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <collision name="skid_rl_collision">
+        <pose>-0.15 0.15 -0.035 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.012</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>100000.0</kp>
+              <kd>100.0</kd>
+              <min_depth>0.002</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <collision name="skid_rr_collision">
+        <pose>-0.15 -0.15 -0.035 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.012</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>100000.0</kp>
+              <kd>100.0</kd>
+              <min_depth>0.002</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- ========================================== -->
+      <!-- Integrated Avionics Sensor Suite           -->
+      <!-- ========================================== -->
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure>
+          <pressure>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3</stddev>
+            </noise>
+          </pressure>
+        </air_pressure>
+      </sensor>
+
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00686</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+
+      <sensor name="navsat_sensor" type="navsat">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+
+    </link>
+  </model>
+</sdf>
